@@ -1,6 +1,6 @@
-import { SignInType, SignUpType } from "@/Controllers/AuthenticationController";
-import NotFoundError from "@/Errors/NotFoundError";
-import AuthenticationRepository from "@/Repositories/AuthenticationRepository";
+import { SignInType, SignUpType } from "../Controllers/AuthenticationController";
+import NotFoundError from "../Errors/NotFoundError";
+import AuthenticationRepository from "../Repositories/AuthenticationRepository";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { User } from "@prisma/client";

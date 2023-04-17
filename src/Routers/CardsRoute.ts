@@ -1,4 +1,4 @@
-import CardController from "@/Controllers/CardController";
+import CardController from "../Controllers/CardController";
 import { Router } from "express";
 
 

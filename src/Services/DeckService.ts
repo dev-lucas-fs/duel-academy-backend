@@ -1,6 +1,6 @@
-import NotFoundError from "@/Errors/NotFoundError";
-import CardRepository from "@/Repositories/CardRepository";
-import DeckRepository from "@/Repositories/DeckRepository";
+import NotFoundError from "../Errors/NotFoundError";
+import CardRepository from "../Repositories/CardRepository";
+import DeckRepository from "../Repositories/DeckRepository";
 
 async function saveDeck(deck: { userId: number, cards: Array<number>, name: string}) {
     const response = await DeckRepository.findUserDeckByName(deck.userId, deck.name)

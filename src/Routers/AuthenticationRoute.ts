@@ -1,4 +1,4 @@
-import AuthenticationController from "@/Controllers/AuthenticationController";
+import AuthenticationController from "../Controllers/AuthenticationController";
 import { Router } from "express";
 
 

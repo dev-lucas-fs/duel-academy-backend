@@ -1,4 +1,4 @@
-import { prisma } from "@/Configs/Prisma"
+import { prisma } from "../Configs/Prisma"
 
 async function findByUserId(userId: number) {
     const response = await prisma.deck.findMany({

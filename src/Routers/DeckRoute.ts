@@ -1,6 +1,6 @@
 // @ts-nocheck
-import DeckController from "@/Controllers/DeckController";
-import { authenticateToken } from "@/Middlewares/AuthenticationMiddleware";
+import DeckController from "../Controllers/DeckController";
+import { authenticateToken } from "../Middlewares/AuthenticationMiddleware";
 import { Router } from "express";
 
 

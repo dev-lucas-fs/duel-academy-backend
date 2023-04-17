@@ -1,4 +1,4 @@
-import AuthenticationService from "@/Services/AuthenticationService";
+import AuthenticationService from "../Services/AuthenticationService";
 import { Request, Response } from "express";
 
 export type SignInType = {

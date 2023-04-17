@@ -3,8 +3,8 @@ import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 
-import unauthorizedError from "@/Errors/NotFoundError";
-import { prisma } from "@/Configs/Prisma";
+import unauthorizedError from "../Errors/NotFoundError";
+import { prisma } from "../Configs/Prisma";
 
 export async function authenticateToken(req: Request, res: Response, next: NextFunction) {
     try {

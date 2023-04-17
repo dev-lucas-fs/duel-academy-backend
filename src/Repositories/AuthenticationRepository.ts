@@ -1,5 +1,5 @@
 import { prisma } from "@/Configs/Prisma"
-import { SignInType, SignUpType } from "@/Controllers/AuthenticationController"
+import { SignInType, SignUpType } from "../Controllers/AuthenticationController"
 
 
 

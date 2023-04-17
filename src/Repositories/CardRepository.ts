@@ -1,5 +1,5 @@
-import { prisma } from "@/Configs/Prisma";
-import NotFoundError from "@/Errors/NotFoundError";
+import { prisma } from "../Configs/Prisma";
+import NotFoundError from "../Errors/NotFoundError";
 
 
 function findAll(name: string) {

@@ -1,5 +1,5 @@
-import NotFoundError from "@/Errors/NotFoundError";
-import CardRepository from "@/Repositories/CardRepository";
+import NotFoundError from "../Errors/NotFoundError";
+import CardRepository from "../Repositories/CardRepository";
 
 async function getById(id: number) {
     const card = await CardRepository.findById(id);

@@ -1,5 +1,5 @@
-import { Errors } from "@/Errors/Errors";
-import CardService from "@/Services/CardService";
+import { Errors } from "../Errors/Errors";
+import CardService from "../Services/CardService";
 import { NOT_FOUND, INTERNAL_SERVER_ERROR } from "http-status"
 import { Request, Response } from "express";
 

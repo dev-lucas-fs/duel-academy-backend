@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import { Errors } from "@/Errors/Errors";
-import { AuthenticatedRequest } from "@/Middlewares/AuthenticationMiddleware";
-import DeckService from "@/Services/DeckService";
+import { Errors } from "../Errors/Errors";
+import { AuthenticatedRequest } from "../Middlewares/AuthenticationMiddleware";
+import DeckService from "../Services/DeckService";
 import { Response } from "express";
 import { INTERNAL_SERVER_ERROR, NOT_FOUND } from "http-status";
 
