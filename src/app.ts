@@ -1,18 +1,26 @@
 import express, { json, Express } from "express";
 import cors from "cors"
 
-import Environment from "./Configs/Environment"
+import cardRoute from "./Routers/CardsRoute"
+import authenticationRoute from "./Routers/AuthenticationRoute"
+import deckRoute from "./Routers/DeckRoute"
+
+import { loadEnvironment } from "./Configs/Environment"
 import { connectDb, disconnectDB } from "./Configs/Prisma";
 
 
 const app = express()
 
-app.use(json())
-app.use(cors())
+
+app
+    .use(json())
+    .use(cors())
+    .use("/card", cardRoute)
+    .use("/auth", authenticationRoute)
+    .use("/decks", deckRoute)
 
 
-const env = new Environment()
-
+loadEnvironment()
 
 export function init(): Promise<Express> {
     connectDb();

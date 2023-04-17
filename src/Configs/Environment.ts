@@ -1,25 +1,14 @@
 import Dotenv from "dotenv"
 import DotenvExpand from "dotenv-expand"
 
+export function loadEnvironment() {
+    const type = process.env.NODE_ENV ?? ''
 
-export default class Environment {
+    let path = ".env"
+    if(!type)
+        path += `.${type}`
 
-    private type: string
-
-    constructor() {
-        this.type = process.env.NODE_ENV
-        this.Load()
-    }
-
-
-    private Load() : void {
-        let path = ".env"
-        if(!this.type)
-            path += `.${this.type}`
-
-        const env = Dotenv.config({ path })
-        DotenvExpand.expand(env)
-    }
-
+    const env = Dotenv.config({ path })
+    DotenvExpand.expand(env)
 }
 

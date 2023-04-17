@@ -10,8 +10,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            Int             @id @default(autoincrement())
+  username      String
+  email         String
+  password      String
+  Decks         Deck[]
+}
+
+model Deck {
+  id            Int             @id @default(autoincrement())
+  name          String
+  userId        Int
+  User          User            @relation(fields: [userId], references: [id])
+  CardOnDeck    CardOnDeck[]
+}
+
+model CardOnDeck {
+  id         Int             @id @default(autoincrement())
+  deckId     Int
+  deck       Deck    @relation(fields: [deckId], references: [id])
+  cardId     Int
+  card       Card    @relation(fields: [cardId], references: [id])
+}
+
+
+model TagForceGame {
+  id            Int             @id @default(autoincrement())
+  name          String
+  Booster       Booster[]
+}
+
 model Booster {
-  id Int @id @default(autoincrement())
-  name String
-  unlock String
+  id            Int             @id @default(autoincrement())
+  name          String
+  img           String?
+  unlock        String
+  gameId        Int
+  Game          TagForceGame    @relation(fields: [gameId], references: [id])
+  CardOnBooster CardOnBooster[]
+}
+
+model CardOnBooster {
+  booster_id Int
+  booster    Booster @relation(fields: [booster_id], references: [id])
+  card_id    Int
+  card       Card    @relation(fields: [card_id], references: [id])
+
+  @@id([booster_id, card_id])
+}
+
+model Card {
+  id            Int             @id @default(autoincrement())
+  name          String
+  img           String?
+  description   String?
+  type          String?
+  CardOnDeck    CardOnDeck[]
+  CardOnBooster CardOnBooster[]
 }

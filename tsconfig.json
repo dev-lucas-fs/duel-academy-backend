@@ -7,9 +7,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "esModuleInterop": true,
+    "strict": true,
     "rootDirs": [
-      "src",
-      "tests"
+      "src"
     ],
     "baseUrl": "src",
     "paths": {
@@ -25,6 +25,8 @@
   },
   "include": [
     "src",
-    "tests"
+    "tests",
+    "yu-gi-oh!-cards-webscrapping",
+    "prisma"
   ]
 }

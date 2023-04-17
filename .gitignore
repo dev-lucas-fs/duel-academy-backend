@@ -4,3 +4,4 @@ coverage
 .env
 .env.development
 .env.test
+extract-data
