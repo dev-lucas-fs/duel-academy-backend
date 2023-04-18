@@ -1,6 +1,7 @@
 import { prisma } from "../Configs/Prisma"
 
 async function findByUserId(userId: number) {
+    console.log(userId)
     const response = await prisma.deck.findMany({
         where: {
             userId
@@ -33,6 +34,7 @@ async function findByUserId(userId: number) {
     })
 
     const decks: any = []
+    console.log(response)
     for(let deck of response) {
         let cards_game: { cards: Array<any>, games: Array<any> } = {
             cards: [],
@@ -74,6 +76,7 @@ function findUserDeckByName(userId: number, name: string) {
 
 
 async function createDeck(deck: { userId: number, cards: Array<number>, name: string}) {
+
     const response = await prisma.deck.create({
         data: {
             userId: deck.userId,

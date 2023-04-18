@@ -10,12 +10,12 @@ function createToken({ id, email }: { id: number, email: string }) {
         id,
         email
     }, process.env.JWT_SECRET ?? "segredo")
-
     return token
 }
 
 async function signIn({ email, password }: SignInType) {
     const user = await AuthenticationRepository.signIn(email)
+    console.log(user)
     if(user === null)
         throw NotFoundError
 

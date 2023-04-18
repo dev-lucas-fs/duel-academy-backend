@@ -21,10 +21,10 @@ async function getAll(request: Request, response: Response) {
     try {
         const { name } = request.query
         const card = await CardService.getAll(name as string);
-
+        
         return response.send(card)
     } catch(error: any) {
-
+        console.log(error)
         if(error.name === Errors.NotFound)
             return response.sendStatus(NOT_FOUND)
 

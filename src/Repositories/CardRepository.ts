@@ -7,6 +7,7 @@ function findAll(name: string) {
         where: {
             name: {
                 contains: name,
+                mode: "insensitive"
             }
         },
         take: 10

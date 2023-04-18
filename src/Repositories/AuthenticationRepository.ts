@@ -1,7 +1,5 @@
-import { prisma } from "@/Configs/Prisma"
+import { prisma } from "../Configs/Prisma"
 import { SignInType, SignUpType } from "../Controllers/AuthenticationController"
-
-
 
 
 function signIn(email: string) {

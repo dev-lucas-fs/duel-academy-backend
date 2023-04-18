@@ -26,7 +26,8 @@ async function postDeck(request: Request, response: Response) {
     try {
         const { userId } = request
         const { cards, name } = request.body
-        console.log(cards, name)
+
+        console.log(userId, 'sss')
         const card = await DeckService.saveDeck({ userId, cards, name });
 
         return response.send(card)

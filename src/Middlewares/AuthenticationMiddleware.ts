@@ -14,12 +14,12 @@ export async function authenticateToken(req: Request, res: Response, next: NextF
         const token = authHeader.split(" ")[1];
         if (!token) return generateUnauthorizedResponse(res);
     
-        const { userId } = jwt.verify(token, process.env.JWT_SECRET ?? "segredo") as JWTPayload;
-        const user = await prisma.user.findFirst({ where: { id: userId } })
+        const { id } = jwt.verify(token, process.env.JWT_SECRET ?? "segredo") as JWTPayload;
+        console.log(id)
+        const user = await prisma.user.findFirst({ where: { id } })
         if(user === null)
             return generateUnauthorizedResponse(res)
         
-        console.log(userId)
         req.userId = user.id;
     } catch(err) {
         console.log(err)
