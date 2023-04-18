@@ -1,7 +1,7 @@
-import { validateBody } from "Middlewares/ValidationMiddleware";
+import { validateBody } from "../Middlewares/ValidationMiddleware";
 import AuthenticationController from "../Controllers/AuthenticationController";
 import { Router } from "express";
-import { signInSchema, signUpSchema } from "Schemas/UserSchemas";
+import { signInSchema, signUpSchema } from "../Schemas/UserSchemas";
 
 
 const router = Router();
