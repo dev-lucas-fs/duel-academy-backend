@@ -13,7 +13,7 @@
       "src"
     ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*", "prisma/*"]
     },
     "baseUrl": "src",
   },
