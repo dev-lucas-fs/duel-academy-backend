@@ -4,6 +4,7 @@ import cors from "cors"
 
 import { loadEnvironment } from "./Configs/Environment"
 import { connectDb, disconnectDB } from "./Configs/Prisma";
+import cardRouter from "Routers/card.route";
 
 
 const app = express()
@@ -12,6 +13,7 @@ const app = express()
 app
     .use(json())
     .use(cors())
+    .use("/cards", cardRouter)
 
 
 loadEnvironment()
