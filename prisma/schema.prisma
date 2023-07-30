@@ -24,13 +24,24 @@ model CardOnBooster {
   card_id    Int
   card       Card    @relation(fields: [card_id], references: [id])
   rarity     String?
-  @@id([booster_id, card_id])
+  id         Int             @id @default(autoincrement())
+}
+
+model Type {
+  id            Int             @id @default(autoincrement())
+  name          String
 }
 
 model Card {
   id            Int             @id @default(autoincrement())
-  name          String
   img           String?
-  description   String?
+  desc          String?
+  atk           Int?
+  level         Int?
+  def           Int?
+  race          String?
+  attribute     String?
+  type          String?
   CardOnBooster CardOnBooster[]
+  name         String?
 }

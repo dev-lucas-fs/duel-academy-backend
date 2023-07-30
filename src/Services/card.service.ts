@@ -7,14 +7,14 @@ async function getCards(name?: string)
 {
     const cards = await cardRepository.findCards(name)
 
-    return cards.map(({ id, name, description, img, CardOnBooster }) => {
+    return cards.map(({ id, name, desc, img, CardOnBooster }) => {
         const boosters = CardOnBooster.map(({ booster }) => booster);
 
         return {
             id,
             name,
-            description,
-            img,
+            description: desc,
+            img: img,
             boosters
         }
     });

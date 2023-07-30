@@ -7,19 +7,31 @@ function findCards(name?: string)
 {
     return prisma.card.findMany({
         where: {
-            name: {
-                contains: name,
-                mode: "insensitive"
-            },
-            description: {
-                contains: name,
-                mode: "insensitive"
-            }
+            OR: [
+                {
+                    name: {
+                        contains: name || "Roid",
+                        mode: "insensitive"
+                    }
+                },
+                {
+                    desc: {
+                        contains: name,
+                        mode: "insensitive"
+                    }
+                },
+            ]
+            
         },
+        orderBy: [
+            {
+                type: 'asc'
+            }
+        ],
         select: {
             id: true,
             name: true,
-            description: true,
+            desc: true,
             img: true,
             CardOnBooster: {
                 select: {
@@ -34,7 +46,7 @@ function findCards(name?: string)
                 }
             }
         },
-        take: 100
+        take: 50
     })    
 }
 
