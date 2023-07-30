@@ -3,6 +3,8 @@ import { connectDb, prisma } from "../src/Configs/Prisma";
 // TAG FORCE 1 DATA
 import tagForceCards from "../prisma/data/tag-force.json"
 import boosters from "../prisma/data/boosters.json"
+import { Type } from "@prisma/client";
+import { type } from "os";
 
 loadEnvironment()
 connectDb()
@@ -31,12 +33,31 @@ type Booster = {
 
 const DEFAULT_BOOSTER_IMG = "https://ms.yugipedia.com//thumb/c/c2/GX02-VideoGame-NA.png/257px-GX02-VideoGame-NA.png"
 
+async function loadTypes()
+{
+    const types = ['Normal Monster', 'Toon Monster', 'Union Effect Monster', 'Spirit Monster', 'Flip Effect Monster', 'Effect Monster', 'Ritual Monster', 'Ritual Effect Monster', 'Fusion Monster', 'Spell Card', 'Trap Card']
+    for(let type of types)
+    {
+        await prisma.type.create({
+            data: {
+                name: type
+            }
+        })
+    }
+}
+
 async function loadCards()
 {
+    let typesRes = await prisma.type.findMany()
+    if(!typesRes) return;
+
+    const types: any = typesRes.reduce((prev: Dict, curr: Type) => {
+        return { ...prev, ...{ [String(curr.name)]: curr.id } };
+    }, {})
+
     for(let card of tagForceCards["data"])
     {
         const {
-            type,
             desc,
             atk,
             def,
@@ -46,9 +67,12 @@ async function loadCards()
             card_images,
             name: names
         } = card as Card
+
+        const type = types[card.type]
+
         const { id } = await prisma.card.create({
             data: {
-                type,
+                type_id: type || 0,
                 desc,
                 atk,
                 def,
@@ -89,7 +113,7 @@ async function loadBoosters()
             })
             
             if(result == null) {
-                console.log("VERIFICAR PROBLEMA EM", card.Name)
+                console.log(`[${card.Name}]\n`)
                 continue
             }
               
@@ -102,7 +126,6 @@ async function loadBoosters()
             })
 
             if(cardOnBooster) {
-                console.log(card.Name, name)
                 continue
             }
 
@@ -123,8 +146,10 @@ async function main()
     await prisma.cardOnBooster.deleteMany({})
     await prisma.booster.deleteMany({})
     await prisma.card.deleteMany({})
+    await prisma.type.deleteMany({})
+    await loadTypes()
     await loadCards();
-    await loadBoosters()
+    await loadBoosters();
 }
 
 

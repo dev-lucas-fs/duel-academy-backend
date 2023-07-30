@@ -25,7 +25,7 @@ function findCards(name?: string)
         },
         orderBy: [
             {
-                type: 'asc'
+                type_id: 'asc'
             }
         ],
         select: {

@@ -30,6 +30,7 @@ model CardOnBooster {
 model Type {
   id            Int             @id @default(autoincrement())
   name          String
+  cards         Card[]
 }
 
 model Card {
@@ -41,7 +42,8 @@ model Card {
   def           Int?
   race          String?
   attribute     String?
-  type          String?
+  type_id       Int?
+  type          Type?    @relation(fields: [type_id], references: [id])
   CardOnBooster CardOnBooster[]
   name         String?
 }
