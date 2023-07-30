@@ -33,6 +33,13 @@ model Type {
   cards         Card[]
 }
 
+model CardName {
+    id           Int             @id @default(autoincrement())
+    name         String?  
+    card_id      Int             
+    card         Card            @relation(fields: [card_id], references: [id])
+}
+
 model Card {
   id            Int             @id @default(autoincrement())
   img           String?
@@ -45,5 +52,5 @@ model Card {
   type_id       Int?
   type          Type?    @relation(fields: [type_id], references: [id])
   CardOnBooster CardOnBooster[]
-  name         String?
+  names         CardName[]
 }

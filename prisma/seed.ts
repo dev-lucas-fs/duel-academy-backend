@@ -4,7 +4,7 @@ import { connectDb, prisma } from "../src/Configs/Prisma";
 import tagForceCards from "../prisma/data/tag-force.json"
 import boosters from "../prisma/data/boosters.json"
 import { Type } from "@prisma/client";
-import { type } from "os";
+import uncatalog from "../prisma/data/uncatalog.json"
 
 loadEnvironment()
 connectDb()
@@ -79,10 +79,19 @@ async function loadCards()
                 level,
                 race,
                 attribute,
-                img: card_images,
-                name: names[0]
+                img: card_images
             }
         })
+
+        for(let name of names)
+        {
+            await prisma.cardName.create({
+                data: {
+                    card_id: id,
+                    name
+                }
+            })
+        }
     }
 }
 
@@ -106,7 +115,11 @@ async function loadBoosters()
 
         for(let card of cards)
         {
-            const result = await prisma.card.findFirst({
+            const uncatalogCards = uncatalog["data"]
+            if(uncatalogCards.includes(card.Name)) continue;
+
+
+            const result = await prisma.cardName.findFirst({
                 where: {
                     name: card.Name
                 }
@@ -119,7 +132,7 @@ async function loadBoosters()
               
             const cardOnBooster = await prisma.cardOnBooster.findFirst({
                 where: {
-                    card_id: result.id,
+                    card_id: result.card_id,
                     booster_id: id,
                     rarity: card.Rarity
                 }
@@ -131,7 +144,7 @@ async function loadBoosters()
 
             await prisma.cardOnBooster.createMany({
                 data: {
-                    card_id: result?.id || 0,
+                    card_id: result.card_id,
                     booster_id: id,
                     rarity: card.Rarity
                 }
@@ -143,6 +156,7 @@ async function loadBoosters()
 
 async function main() 
 {
+    await prisma.cardName.deleteMany({})
     await prisma.cardOnBooster.deleteMany({})
     await prisma.booster.deleteMany({})
     await prisma.card.deleteMany({})

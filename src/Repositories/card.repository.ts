@@ -5,7 +5,7 @@ import { prisma } from "Configs/Prisma"
 
 function findCards(name?: string)
 {
-    return prisma.card.findMany({
+    return prisma.cardName.findMany({
         where: {
             OR: [
                 {
@@ -15,9 +15,11 @@ function findCards(name?: string)
                     }
                 },
                 {
-                    desc: {
-                        contains: name,
-                        mode: "insensitive"
+                    card: {
+                        desc: {
+                            contains: name,
+                            mode: "insensitive"
+                        }
                     }
                 },
             ]
@@ -25,26 +27,34 @@ function findCards(name?: string)
         },
         orderBy: [
             {
-                type_id: 'asc'
+                card: {
+                    type_id: 'asc',
+                }
             }
         ],
+        distinct: ["card_id"],
         select: {
             id: true,
             name: true,
-            desc: true,
-            img: true,
-            CardOnBooster: {
+            card: {
                 select: {
-                    booster: {
+                    img: true,
+                    desc: true,
+                    CardOnBooster: {
                         select: {
-                            id: true,
-                            name: true,
-                            img: true,
-                            unlock: true
+                            booster: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    img: true,
+                                    unlock: true
+                                }
+                            }
                         }
                     }
                 }
             }
+            
         },
         take: 50
     })    
